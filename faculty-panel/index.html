@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Faculty Portal</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <script defer src="script.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+  <header class="top-bar">
+    <div class="logo-container">
+      <i class="fas fa-graduation-cap"></i>
+      <h1>Pravaah Faculty</h1>
+    </div>
+    <div class="top-bar-controls">
+      <button id="notificationBtn"><i class="fas fa-bell"></i></button>
+      <button id="loginBtn">Log In</button>
+    </div>
+  </header>
+  <main class="main-content">
+    <!-- Main Dashboard -->
+    <section id="dashboard" class="dashboard-container">
+      <section class="left-panel">
+        <div class="card glass">
+          <div class="card-content">
+            <i class="fas fa-id-card icon"></i>
+            <h3>My Profile</h3>
+            <p>View and Edit Details about your Profile online.</p>
+          </div>
+          <div class="card-action">
+            <button class="action-btn" data-page="faculty-profile">View <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+        <div class="card glass">
+          <div class="card-content">
+            <i class="fas fa-book icon"></i>
+            <h3>Courses</h3>
+            <p>Create and Update content on your course.</p>
+          </div>
+          <div class="card-action">
+            <button class="action-btn" data-page="course-page">Manage <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+        <div class="card glass">
+          <div class="card-content">
+            <i class="fas fa-question-circle icon"></i>
+            <h3>Assignments & Quizzes</h3>
+            <p>Upload assignments, set deadlines, and create quizzes.</p>
+          </div>
+          <div class="card-action">
+            <button class="action-btn" data-page="assignments-quizzes">Manage <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+        <div class="card glass">
+          <div class="card-content">
+            <i class="fas fa-chart-line icon"></i>
+            <h3>Track Report</h3>
+            <p>View student progress, grade assignments, and provide feedback.</p>
+          </div>
+          <div class="card-action">
+            <button class="action-btn" data-page="track-report">View <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+        <div class="card glass">
+          <div class="card-content">
+            <i class="far fa-copyright icon"></i>
+            <h3>Plagiarism Detection</h3>
+            <p>Check plagiarism in Student's Assignments.</p>
+          </div>
+          <div class="card-action">
+            <button class="action-btn" data-page="plagiarism">Monitor <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+      </section>
+
+      <section class="announcement glass">
+        <h3><i class="fas fa-bullhorn"></i> Announcements</h3>
+        <ul id="announcementList">
+          <li><span class="announcement-date">May 1</span> 📢 Semester exams start May 15.</li>
+          <li><span class="announcement-date">Apr 5</span> 🛠️ Maintenance on April 10, 1–3 AM.</li>
+          <li><span class="announcement-date">Mar 28</span> 🆕 New course on Data Science added.</li>
+        </ul>
+        <div class="announcement-input">
+          <input type="text" id="newAnnouncement" placeholder="Enter new announcement..." />
+          <button onclick="addAnnouncement()">Publish</button>
+        </div>
+      </section>
+    </section>
+
+    <!-- Faculty Profile Page -->
+<section id="faculty-profile" class="page-content">
+  <div class="page-header">
+    <div class="page-title">
+      <i class="fas fa-id-card"></i>
+      <h2>Faculty Profile</h2>
+    </div>
+    <button class="back-btn" data-return="dashboard"><i class="fas fa-arrow-left"></i> Back to Dashboard</button>
+  </div>
+  
+  <div class="page-controls">
+    <button class="add-new-btn"><i class="fas fa-edit"></i> Edit Profile</button>
+  </div>
+  
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Field</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Faculty ID</td>
+        <td>XUF9090</td>
+      </tr>
+      <tr>
+        <td>Name</td>
+        <td>Peter Harrison</td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td>(University Mail)</td>
+      </tr>
+      <tr>
+        <td>Phone</td>
+        <td>XXXXXXXXXX</td>
+      </tr>
+      <tr>
+        <td>Date of Birth</td>
+        <td>XX/XX/XXXX</td>
+      </tr>
+      <tr>
+        <td>Gender</td>
+        <td>M/F</td>
+      </tr>
+      <tr>
+        <td>Position</td>
+        <td>Assistant Professor-1</td>
+      </tr>
+      <tr>
+        <td>Department</td>
+        <td>CSE</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Courses Page -->
+<section id="course-page" class="page-content">
+  <div class="page-header">
+    <div class="page-title">
+      <i class="fas fa-book"></i>
+      <h2>Courses</h2>
+    </div>
+    <button class="back-btn" data-return="dashboard"><i class="fas fa-arrow-left"></i> Back to Dashboard</button>
+  </div>
+  
+  <div class="page-controls">
+    <button class="add-new-btn"><i class="fas fa-plus"></i> Add New Course</button>
+  </div>
+  
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Course ID</th>
+        <th>Course Name</th>
+        <th>Department</th>
+        <th>Instructor</th>
+        <th>Students Enrolled</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>CS101</td>
+        <td>Introduction to Programming</td>
+        <td>Computer Science</td>
+        <td>Dr. Alan Turing</td>
+        <td>45</td>
+        <td>Active</td>
+        <td class="table-actions">
+          <button class="btn-sm btn-edit">Edit</button>
+          <button class="btn-sm btn-delete">Delete</button>
+        </td>
+      </tr>
+      <tr>
+        <td>MATH201</td>
+        <td>Advanced Calculus</td>
+        <td>Mathematics</td>
+        <td>Dr. Emily Newton</td>
+        <td>32</td>
+        <td>Active</td>
+        <td class="table-actions">
+          <button class="btn-sm btn-edit">Edit</button>
+          <button class="btn-sm btn-delete">Delete</button>
+        </td>
+      </tr>
+      <tr>
+        <td>BIO305</td>
+        <td>Molecular Biology</td>
+        <td>Biology</td>
+        <td>Dr. James Watson</td>
+        <td>28</td>
+        <td>Active</td>
+        <td class="table-actions">
+          <button class="btn-sm btn-edit">Edit</button>
+          <button class="btn-sm btn-delete">Delete</button>
+        </td>
+      </tr>
+      <tr>
+        <td>PHYS103</td>
+        <td>Classical Mechanics</td>
+        <td>Physics</td>
+        <td>Dr. Richard Feynman</td>
+        <td>38</td>
+        <td>Upcoming</td>
+        <td class="table-actions">
+          <button class="btn-sm btn-edit">Edit</button>
+          <button class="btn-sm btn-delete">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- My Assignments & Quizzes Page -->
+<section id="assignments-quizzes" class="page-content">
+  <div class="page-header">
+    <div class="page-title">
+      <i class="fas fa-question-circle"></i>
+      <h2>My Assignments & Quizzes</h2>
+    </div>
+    <button class="back-btn" data-return="dashboard"><i class="fas fa-arrow-left"></i> Back to Dashboard</button>
+  </div>
+  
+  <div class="page-controls">
+    <button class="add-new-btn"><i class="fas fa-plus"></i> Add New Assignment</button>
+    <br>
+    <button class="add-new-btn"><i class="fas fa-plus"></i> Create New Quiz</button>
+  </div>
+  
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Type</th>
+        <th>Course</th>
+        <th>Deadline</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>A101</td>
+        <td>Assignment 1: Basics of Programming</td>
+        <td>Assignment</td>
+        <td>CS101</td>
+        <td>2025-04-15</td>
+        <td>Active</td>
+        <td class="table-actions">
+          <button class="btn-sm btn-edit">Edit</button>
+          <button class="btn-sm btn-delete">Delete</button>
+        </td>
+      </tr>
+      <tr>
+        <td>Q201</td>
+        <td>Quiz 1: Advanced Calculus</td>
+        <td>Quiz</td>
+        <td>MATH201</td>
+        <td>2025-04-20</td>
+        <td>Upcoming</td>
+        <td class="table-actions">
+          <button class="btn-sm btn-edit">Edit</button>
+          <button class="btn-sm btn-delete">Delete</button>
+        </td>
+      </tr>
+      <tr>
+        <td>A102</td>
+        <td>Assignment 2: Molecular Biology</td>
+        <td>Assignment</td>
+        <td>BIO305</td>
+        <td>2025-04-18</td>
+        <td>Active</td>
+        <td class="table-actions">
+          <button class="btn-sm btn-edit">Edit</button>
+          <button class="btn-sm btn-delete">Delete</button>
+        </td>
+      </tr>
+      <tr>
+        <td>Q202</td>
+        <td>Quiz 2: Classical Mechanics</td>
+        <td>Quiz</td>
+        <td>PHYS103</td>
+        <td>2025-04-25</td>
+        <td>Upcoming</td>
+        <td class="table-actions">
+          <button class="btn-sm btn-edit">Edit</button>
+          <button class="btn-sm btn-delete">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Track Report Page -->
+<section id="track-report" class="page-content">
+  <div class="page-header">
+    <div class="page-title">
+      <i class="fas fa-chart-line"></i>
+      <h2>Track Report</h2>
+    </div>
+    <button class="back-btn" data-return="dashboard"><i class="fas fa-arrow-left"></i> Back to Dashboard</button>
+  </div>
+  
+  <div class="page-controls">
+    <button class="add-new-btn"><i class="fas fa-plus"></i> Add Feedback</button>
+  </div>
+  
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Student ID</th>
+        <th>Name</th>
+        <th>Course</th>
+        <th>Assignment/Quiz</th>
+        <th>Grade</th>
+        <th>Feedback</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>S101</td>
+        <td>John Doe</td>
+        <td>CS101</td>
+        <td>Assignment 1</td>
+        <td>A</td>
+        <td>Excellent work!</td>
+        <td class="table-actions">
+          <button class="btn-sm btn-edit">Edit</button>
+          <button class="btn-sm btn-delete">Delete</button>
+        </td>
+      </tr>
+      <tr>
+        <td>S102</td>
+        <td>Jane Smith</td>
+        <td>MATH201</td>
+        <td>Quiz 1</td>
+        <td>B+</td>
+        <td>Good effort, but needs improvement.</td>
+        <td class="table-actions">
+          <button class="btn-sm btn-edit">Edit</button>
+          <button class="btn-sm btn-delete">Delete</button>
+        </td>
+      </tr>
+      <tr>
+        <td>S103</td>
+        <td>Michael Brown</td>
+        <td>BIO305</td>
+        <td>Assignment 2</td>
+        <td>B</td>
+        <td>Well done, but review the concepts.</td>
+        <td class="table-actions">
+          <button class="btn-sm btn-edit">Edit</button>
+          <button class="btn-sm btn-delete">Delete</button>
+        </td>
+      </tr>
+      <tr>
+        <td>S104</td>
+        <td>Emily Davis</td>
+        <td>PHYS103</td>
+        <td>Quiz 2</td>
+        <td>A-</td>
+        <td>Great understanding of the topic.</td>
+        <td class="table-actions">
+          <button class="btn-sm btn-edit">Edit</button>
+          <button class="btn-sm btn-delete">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Plagiarism Monitor Page -->
+<section id="plagiarism" class="page-content">
+  <div class="page-header">
+    <div class="page-title">
+      <i class="fas fa-file-alt"></i>
+      <h2>Plagiarism Monitor</h2>
+    </div>
+    <button class="back-btn" data-return="dashboard"><i class="fas fa-arrow-left"></i> Back to Dashboard</button>
+  </div>
+  
+  <div class="page-controls">
+    <button class="add-new-btn"><i class="fas fa-upload"></i> Upload Assignment</button>
+  </div>
+  
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Assignment ID</th>
+        <th>Title</th>
+        <th>Course</th>
+        <th>Submitted By</th>
+        <th>Submission Date</th>
+        <th>Plagiarism Score</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>A101</td>
+        <td>Basics of Programming</td>
+        <td>CS101</td>
+        <td>John Doe</td>
+        <td>2025-04-10</td>
+        <td>5%</td>
+        <td class="table-actions">
+          <button class="btn-sm btn-view">View Report</button>
+          <button class="btn-sm btn-delete">Delete</button>
+        </td>
+      </tr>
+      <tr>
+        <td>A102</td>
+        <td>Advanced Calculus</td>
+        <td>MATH201</td>
+        <td>Jane Smith</td>
+        <td>2025-04-12</td>
+        <td>12%</td>
+        <td class="table-actions">
+          <button class="btn-sm btn-view">View Report</button>
+          <button class="btn-sm btn-delete">Delete</button>
+        </td>
+      </tr>
+      <tr>
+        <td>A103</td>
+        <td>Molecular Biology</td>
+        <td>BIO305</td>
+        <td>Michael Brown</td>
+        <td>2025-04-14</td>
+        <td>0%</td>
+        <td class="table-actions">
+          <button class="btn-sm btn-view">View Report</button>
+          <button class="btn-sm btn-delete">Delete</button>
+        </td>
+      </tr>
+      <tr>
+        <td>A104</td>
+        <td>Classical Mechanics</td>
+        <td>PHYS103</td>
+        <td>Emily Davis</td>
+        <td>2025-04-15</td>
+        <td>8%</td>
+        <td class="table-actions">
+          <button class="btn-sm btn-view">View Report</button>
+          <button class="btn-sm btn-delete">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+  </main>
+</body>
+</html>
