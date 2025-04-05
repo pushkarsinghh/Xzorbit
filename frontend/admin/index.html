@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Portal</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <script defer src="script.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="../css/profile-card.css">
+</head>
+<body>
+  <header class="top-bar">
+    <div class="header-container">
+      <div class="logo-container">
+        <i class="fas fa-graduation-cap"></i>
+        <h1 class="header-title">Pravaah Admin</h1>
+      </div>
+      <div class="header-actions">
+        <button id="logoutBtn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <section id="dashboard" class="dashboard-container">
+      <section class="left-panel">
+        <div class="card glass">
+          <div class="card-content">
+            <i class="fas fa-users icon"></i>
+            <h3>User Management</h3>
+            <p>Register and manage faculty and student accounts.</p>
+          </div>
+          <div class="card-action">
+            <button class="action-btn" data-page="user-management">Manage <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+        <div class="card glass">
+          <div class="card-content">
+            <i class="fas fa-book icon"></i>
+            <h3>Course Management</h3>
+            <p>Create, edit, and delete courses on the platform.</p>
+          </div>
+          <div class="card-action">
+            <button class="action-btn" data-page="course-management">Manage <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+        <div class="card glass">
+          <div class="card-content">
+            <i class="fas fa-chart-line icon"></i>
+            <h3>Report Generation</h3>
+            <p>View reports on student performance and course progress.</p>
+          </div>
+          <div class="card-action">
+            <button class="action-btn" data-page="report-generation">View <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+        <div class="card glass">
+          <div class="card-content">
+            <i class="fas fa-cogs icon"></i>
+            <h3>System Monitoring</h3>
+            <p>Track usage, support requests, and platform settings.</p>
+          </div>
+          <div class="card-action">
+            <button class="action-btn" data-page="system-monitoring">Monitor <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+      </section>
+
+      <section class="announcement glass">
+        <h3><i class="fas fa-bullhorn"></i> Announcements</h3>
+        <ul id="announcementList">
+          <li><span class="announcement-date">May 1</span> 📢 Semester exams start May 15.</li>
+          <li><span class="announcement-date">Apr 5</span> 🛠️ Maintenance on April 10, 1–3 AM.</li>
+          <li><span class="announcement-date">Mar 28</span> 🆕 New course on Data Science added.</li>
+        </ul>
+        <div class="announcement-input">
+          <input type="text" id="newAnnouncement" placeholder="Enter new announcement..." />
+          <button onclick="addAnnouncement()">Publish</button>
+        </div>
+      </section>
+    </section>
+
+    <section id="user-management" class="page-content">
+      <div class="page-header">
+        <div class="page-title">
+          <i class="fas fa-users"></i>
+          <h2>User Management</h2>
+        </div>
+        <button class="back-btn" data-return="dashboard"><i class="fas fa-arrow-left"></i> Back to Dashboard</button>
+      </div>
+      
+      <div class="page-controls">
+        <button class="add-new-btn"><i class="fas fa-plus"></i> Add New User</button>
+      </div>
+      
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>001</td>
+            <td>John Smith</td>
+            <td>john.smith@example.com</td>
+            <td>Faculty</td>
+            <td>Active</td>
+            <td class="table-actions">
+              <button class="btn-sm btn-edit">Edit</button>
+              <button class="btn-sm btn-delete">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>002</td>
+            <td>Jane Doe</td>
+            <td>jane.doe@example.com</td>
+            <td>Student</td>
+            <td>Active</td>
+            <td class="table-actions">
+              <button class="btn-sm btn-edit">Edit</button>
+              <button class="btn-sm btn-delete">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>003</td>
+            <td>Robert Johnson</td>
+            <td>robert.j@example.com</td>
+            <td>Admin</td>
+            <td>Active</td>
+            <td class="table-actions">
+              <button class="btn-sm btn-edit">Edit</button>
+              <button class="btn-sm btn-delete">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>004</td>
+            <td>Emily Williams</td>
+            <td>emily.w@example.com</td>
+            <td>Student</td>
+            <td>Inactive</td>
+            <td class="table-actions">
+              <button class="btn-sm btn-edit">Edit</button>
+              <button class="btn-sm btn-delete">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="course-management" class="page-content">
+      <div class="page-header">
+        <div class="page-title">
+          <i class="fas fa-book"></i>
+          <h2>Course Management</h2>
+        </div>
+        <button class="back-btn" data-return="dashboard"><i class="fas fa-arrow-left"></i> Back to Dashboard</button>
+      </div>
+      
+      <div class="page-controls">
+        <button class="add-new-btn"><i class="fas fa-plus"></i> Add New Course</button>
+      </div>
+      
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Course Name</th>
+            <th>Department</th>
+            <th>Instructor</th>
+            <th>Students</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CS101</td>
+            <td>Introduction to Programming</td>
+            <td>Computer Science</td>
+            <td>Dr. Alan Turing</td>
+            <td>45</td>
+            <td>Active</td>
+            <td class="table-actions">
+              <button class="btn-sm btn-edit">Edit</button>
+              <button class="btn-sm btn-delete">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>MATH201</td>
+            <td>Advanced Calculus</td>
+            <td>Mathematics</td>
+            <td>Dr. Emily Newton</td>
+            <td>32</td>
+            <td>Active</td>
+            <td class="table-actions">
+              <button class="btn-sm btn-edit">Edit</button>
+              <button class="btn-sm btn-delete">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>BIO305</td>
+            <td>Molecular Biology</td>
+            <td>Biology</td>
+            <td>Dr. James Watson</td>
+            <td>28</td>
+            <td>Active</td>
+            <td class="table-actions">
+              <button class="btn-sm btn-edit">Edit</button>
+              <button class="btn-sm btn-delete">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>PHYS103</td>
+            <td>Classical Mechanics</td>
+            <td>Physics</td>
+            <td>Dr. Richard Feynman</td>
+            <td>38</td>
+            <td>Upcoming</td>
+            <td class="table-actions">
+              <button class="btn-sm btn-edit">Edit</button>
+              <button class="btn-sm btn-delete">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="report-generation" class="page-content">
+      <div class="page-header">
+        <div class="page-title">
+          <i class="fas fa-chart-line"></i>
+          <h2>Report Generation</h2>
+        </div>
+        <button class="back-btn" data-return="dashboard"><i class="fas fa-arrow-left"></i> Back to Dashboard</button>
+      </div>
+      
+      <div class="widgets-container">
+        <div class="widget">
+          <div class="widget-icon">
+            <i class="fas fa-user-graduate"></i>
+          </div>
+          <div class="widget-info">
+            <h4>Total Students</h4>
+            <p>2,453</p>
+          </div>
+        </div>
+        <div class="widget">
+          <div class="widget-icon">
+            <i class="fas fa-chalkboard-teacher"></i>
+          </div>
+          <div class="widget-info">
+            <h4>Total Faculty</h4>
+            <p>142</p>
+          </div>
+        </div>
+        <div class="widget">
+          <div class="widget-icon">
+            <i class="fas fa-book-open"></i>
+          </div>
+          <div class="widget-info">
+            <h4>Active Courses</h4>
+            <p>87</p>
+          </div>
+        </div>
+        <div class="widget">
+          <div class="widget-icon">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <div class="widget-info">
+            <h4>Completion Rate</h4>
+            <p>78%</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="chart-container">
+        <h3>Student Performance Trends</h3>
+        <div class="chart-placeholder" style="height: 300px; display: flex; align-items: center; justify-content: center; background: #f9f9f9; border-radius: 8px;">
+          <p>Chart visualization goes here</p>
+        </div>
+      </div>
+      
+      <div class="page-controls">
+        <button class="add-new-btn"><i class="fas fa-file-export"></i> Export Reports</button>
+      </div>
+    </section>
+
+    <section id="system-monitoring" class="page-content">
+      <div class="page-header">
+        <div class="page-title">
+          <i class="fas fa-cogs"></i>
+          <h2>System Monitoring</h2>
+        </div>
+        <button class="back-btn" data-return="dashboard"><i class="fas fa-arrow-left"></i> Back to Dashboard</button>
+      </div>
+      
+      <div class="widgets-container">
+        <div class="widget">
+          <div class="widget-icon">
+            <i class="fas fa-server"></i>
+          </div>
+          <div class="widget-info">
+            <h4>Server Uptime</h4>
+            <p>99.8%</p>
+          </div>
+        </div>
+        <div class="widget">
+          <div class="widget-icon">
+            <i class="fas fa-tachometer-alt"></i>
+          </div>
+          <div class="widget-info">
+            <h4>Avg Response Time</h4>
+            <p>230ms</p>
+          </div>
+        </div>
+        <div class="widget">
+          <div class="widget-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="widget-info">
+            <h4>Active Users</h4>
+            <p>328</p>
+          </div>
+        </div>
+        <div class="widget">
+          <div class="widget-icon">
+            <i class="fas fa-exclamation-triangle"></i>
+          </div>
+          <div class="widget-info">
+            <h4>Alerts</h4>
+            <p>2</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="chart-container">
+        <h3>System Performance</h3>
+        <div class="chart-placeholder" style="height: 300px; display: flex; align-items: center; justify-content: center; background: #f9f9f9; border-radius: 8px;">
+          <p>Performance metrics visualization goes here</p>
+        </div>
+      </div>
+      
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Log ID</th>
+            <th>Timestamp</th>
+            <th>Event</th>
+            <th>Status</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>L9283</td>
+            <td>2023-05-10 14:32:45</td>
+            <td>System Update</td>
+            <td>Completed</td>
+            <td>Version 2.4.1 deployed successfully</td>
+          </tr>
+          <tr>
+            <td>L9284</td>
+            <td>2023-05-10 15:01:22</td>
+            <td>Database Backup</td>
+            <td>Completed</td>
+            <td>Daily backup cycle finished</td>
+          </tr>
+          <tr>
+            <td>L9285</td>
+            <td>2023-05-10 16:45:08</td>
+            <td>Server Alert</td>
+            <td>Warning</td>
+            <td>High CPU usage detected (82%)</td>
+          </tr>
+          <tr>
+            <td>L9286</td>
+            <td>2023-05-10 18:12:33</td>
+            <td>Login Attempt</td>
+            <td>Failed</td>
+            <td>Multiple failed login attempts from IP 192.168.1.45</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="../js/profile-card.js"></script>
+  <script>
+    const isDevelopment = true;
+
+    const mockUserData = {
+      id: "A001",
+      fullName: "Admin User",
+      email: "admin@pravaah.com",
+      role: "admin",
+      phone: "+91 9876543210",
+      department: "Administration",
+      joinDate: "2023-01-01",
+      accessLevel: "Super Admin"
+    };
+
+    function checkAuth() {
+      let userData = JSON.parse(localStorage.getItem('pravaah_user') || sessionStorage.getItem('pravaah_user') || 'null');
+      
+      if (!userData && isDevelopment) {
+        userData = mockUserData;
+        localStorage.setItem('pravaah_user', JSON.stringify(userData));
+      }
+      
+      if (!userData || (userData.role !== 'admin' && !isDevelopment)) {
+        window.location.href = '../login/';
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem('pravaah_user');
+      sessionStorage.removeItem('pravaah_user');
+      window.location.href = '../login/';
+    }
+
+    checkAuth();
+  </script>
+</body>
+</html>
